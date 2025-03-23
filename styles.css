@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url('./assets/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1{
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+  text-align: center;
+  font-size: 35px;
+  margin-left: 180px;
+}
+
+p{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+  text-align: center;
+}
+
+.text{
+    padding: 150px 60px 60px 40px;
+}
