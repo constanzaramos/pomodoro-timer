@@ -17,6 +17,32 @@
         trabajo + 5min descanso). Diseñado para ayudarte a estudiar o trabajar
         de forma más agradable.
       </p>
+      <form id="form-pomodoro">
+        <label for="work-time">Tiempo de trabajo (min):</label>
+        <input type="number" id="work-time" value="25" min="1" max="60" />
+
+        <label for="break-time">Tiempo de descanso (min):</label>
+        <input type="number" id="break-time" value="5" min="1" max="60" />
+        
+        <div class="button-group">
+          <button type="submit">Iniciar</button>
+        <button type="button" id="stop-button">Detener</button>
+        <button type="button" id="reset-button">Reiniciar</button>
+
+        </div>
+        
+        <div id="timer-display">00:00</div>
+        <div id="status-display">Estado: Listo</div>
+        <div id="progress-bar-container">
+          <div id="progress-bar"></div>
+        </div>
+        <div id="progress-text">Progreso: 0%</div>
+        <!-- <div id="notification"></div>
+        <div id="sound-notification"></div>
+        <div id="sound-notification-break"></div>
+        <div id="sound-notification-end"></div>
+        <div id="sound-notification-break-end"></div> --> 
+      </form>
     </div>
     <script src="pomodoro.js"></script>
   </body>

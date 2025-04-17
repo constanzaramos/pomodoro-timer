@@ -9,6 +9,16 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
 }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
 
 h1{
   font-family: "Permanent Marker", cursive;
@@ -29,5 +39,101 @@ p{
 }
 
 .text{
-    padding: 150px 60px 60px 40px;
+  padding: 80px 60px 60px 40px;
+}
+
+form {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 30px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: white;
+  font-size: 18px;
+}
+
+input, button {
+  padding: 10px;
+  margin: 10px 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  cursor: pointer;
+  background-color: #76c294;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #55827d;
+}
+
+#timer-display {
+  font-size: 2em;
+  margin-top: 15px;
+  color: white;
+}
+
+#status-display {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #fefefe;
+}
+
+#progress-bar-container {
+  width: 100%;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 5px;
+  margin-top: 20px;
+  height: 15px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #a771e7;
+  transition: width 1s linear;
+}
+
+.button-group {
+  margin-top: 15px;
+}
+
+button {
+  background-color: #a771e7; 
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #7a60cd;
+  transform: scale(1.05);
+}
+
+#stop-button {
+  background-color: #55827d; 
+}
+
+#stop-button:hover {
+  background-color: #3c5d58;
+}
+
+#reset-button {
+  background-color: #76c294; 
+}
+
+#reset-button:hover {
+  background-color: #5ea784;
 }
