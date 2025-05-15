@@ -23,27 +23,33 @@
 
         <label for="break-time">Tiempo de descanso (min):</label>
         <input type="number" id="break-time" value="5" min="1" max="60" />
-        
+
         <div class="button-group">
           <button type="submit">Iniciar</button>
-        <button type="button" id="stop-button">Detener</button>
-        <button type="button" id="reset-button">Reiniciar</button>
+          <button type="button" id="stop-button">Detener</button>
+          <button type="button" id="reset-button">Reiniciar</button>
+        </div>
 
+        <div class="circle-container">
+          <svg class="progress-ring" width="160" height="160">
+            <circle class="progress-ring__bg" r="70" cx="80" cy="80" />
+            <circle class="progress-ring__circle" r="70" cx="80" cy="80" />
+          </svg>
+          <div id="timer-display" class="timer-text">00:00</div>
         </div>
-        
-        <div id="timer-display">00:00</div>
         <div id="status-display">Estado: Listo</div>
-        <div id="progress-bar-container">
-          <div id="progress-bar"></div>
-        </div>
-        <div id="progress-text">Progreso: 0%</div>
-        <!-- <div id="notification"></div>
-        <div id="sound-notification"></div>
-        <div id="sound-notification-break"></div>
-        <div id="sound-notification-end"></div>
-        <div id="sound-notification-break-end"></div> --> 
       </form>
+
+      <div class="session-history">
+        <h2>Historial de sesiones</h2>
+        <div class="button-group">
+          <button id="view-history" type="button">Ver historial</button>
+          <button id="clear-history" type="button">Borrar historial</button>
+        </div>
+        <ul id="history-list"></ul>
+      </div>
     </div>
+
     <script src="pomodoro.js"></script>
   </body>
 </html>
