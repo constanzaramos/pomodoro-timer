@@ -40,7 +40,7 @@ Este proyecto es un **temporizador Pomodoro**. Está diseñado para ayudarte a *
   - Manejo de errores
   - DOM dinámico
 - Librerías externas:
-  - [SweetAlert2](https://sweetalert2.github.io/) para modales elegantes
+  - [SweetAlert2](https://sweetalert2.github.io/) para el modal
   - Spotify Embed para música de foco 🎧
 
 ---
