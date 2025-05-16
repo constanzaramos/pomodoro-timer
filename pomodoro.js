@@ -18,6 +18,11 @@ const viewButton = document.getElementById("view-history");
 const clearButton = document.getElementById("clear-history");
 const historyList = document.getElementById("history-list");
 
+document.getElementById("toggle-info").addEventListener("click", () => {
+  const info = document.getElementById("info-content");
+  info.classList.toggle("visible");
+});
+
 function fetchTasks() {
   fetch("tareas.json")
     .then(response => {
@@ -200,5 +205,22 @@ function setProgress(percent) {
   const offset = circumference - (percent / 100) * circumference;
   circle.style.strokeDashoffset = offset;
 }
+
+document.getElementById("toggle-info").addEventListener("click", () => {
+  Swal.fire({
+    title: "¿Cómo funciona el método Pomodoro? 🍅",
+    html: `
+      <ol style="text-align:left;">
+        <li>✅ Escoge una tarea de la lista o crea la tuya.</li>
+        <li>⏱ Trabaja durante <strong>25 minutos</strong>.</li>
+        <li>☕ Tómate <strong>5 minutos de descanso</strong>.</li>
+        <li>🌿 Cada 4 pomodoros, toma un descanso más largo (15–30 min).</li>
+       
+      </ol>
+    `,
+    icon: "info",
+    confirmButtonText: "¡Entendido!"
+  });
+});
 
 fetchTasks();

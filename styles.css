@@ -209,3 +209,19 @@ button:hover {
 #history-list li {
   margin-bottom: 5px;
 }
+
+#toggle-info {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition: transform 0.2s ease;
+}
+
+#toggle-info:hover {
+  transform: scale(1.1);
+}
+
+
+

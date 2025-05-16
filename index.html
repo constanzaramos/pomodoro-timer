@@ -14,8 +14,38 @@
       <h1>Pomodoro Timer</h1>
       <p>
         Este simulador permite realizar ciclos de concentración Pomodoro (25min
-        trabajo + 5min descanso). Diseñado para ayudarte a gestionar tu tiempo y mejorar tu productividad.
+        trabajo + 5min descanso). Diseñado para ayudarte a gestionar tu tiempo y
+        mejorar tu productividad.
+          <div class="info-section">
+        <button
+          id="toggle-info"
+          title="¿Cómo funciona?"
+          aria-label="¿Cómo funciona?"
+        >
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="#ffffff"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="12" cy="12" r="12" fill="#a771e7" />
+            <text
+              x="12"
+              y="16"
+              text-anchor="middle"
+              fill="#fff"
+              font-size="16"
+              font-family="Arial, sans-serif"
+              font-weight="bold"
+            >
+              ?
+            </text>
+          </svg>
+        </button>
       </p>
+      </div>
+
       <form id="form-pomodoro">
         <div class="tarea-selector" id="tarea-selector"></div>
         <label for="work-time">Tiempo de trabajo (min):</label>
@@ -51,5 +81,6 @@
     </div>
 
     <script src="pomodoro.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>
