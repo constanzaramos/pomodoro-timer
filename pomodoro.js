@@ -3,23 +3,99 @@ let breakMinutes = 5;
 let isWorkTime = true;
 let intervalId = null;
 let currentTime = 0;
-
 let sessionHistory = JSON.parse(localStorage.getItem("sessionHistory")) || [];
+
+let AvailableTasks = [];
 
 const form = document.getElementById("form-pomodoro");
 const workInput = document.getElementById("work-time");
 const breakInput = document.getElementById("break-time");
 const timerDisplay = document.getElementById("timer-display");
 const statusDisplay = document.getElementById("status-display");
-const progressBar = document.getElementById("progress-bar");
 const stopButton = document.getElementById("stop-button");
 const resetButton = document.getElementById("reset-button");
-const viewBtn = document.getElementById("view-history");
-const clearBtn = document.getElementById("clear-history");
+const viewButton = document.getElementById("view-history");
+const clearButton = document.getElementById("clear-history");
 const historyList = document.getElementById("history-list");
+
+function fetchTasks() {
+  fetch("tareas.json")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("No se pudo cargar el archivo de tareas");
+      }
+      return response.json();
+    })
+    .then(data => {
+      AvailableTasks = data;
+      renderSelectorTask();
+    })
+    .catch(error => {
+      Swal.fire({
+        icon: "error",
+        title: "Error al cargar tareas",
+        text: error.message
+      });
+    });
+}
+
+function renderSelectorTask() {
+  const container = document.getElementById("tarea-selector");
+  const label = document.createElement("label");
+  label.setAttribute("for", "tarea-select");
+  label.textContent = "¿Qué tarea vas a hacer?";
+  container.appendChild(label);
+
+  const select = document.createElement("select");
+  select.id = "tarea-select";
+  select.innerHTML = `<option value="">Selecciona una tarea</option>`;
+  AvailableTasks.forEach(task => {
+    const option = document.createElement("option");
+    option.value = task.name;
+    option.textContent = task.name;
+    select.appendChild(option);
+  });
+  container.appendChild(select);
+
+  const input = document.createElement("input");
+  input.id = "tarea-personalizada";
+  input.type = "text";
+  input.placeholder = "Describe tu tarea...";
+  input.style.display = "none";
+  container.appendChild(input);
+
+  select.addEventListener("change", () => {
+    input.style.display = select.value === "Otra..." ? "block" : "none";
+  });
+}
+
+function getSelectedTask() {
+  const select = document.getElementById("tarea-select");
+  const input = document.getElementById("tarea-personalizada");
+  if (!select) return "Sin tarea";
+  return select.value === "Otra..." ? (input.value.trim() || "Tarea personalizada") : select.value || "Sin tarea";
+}
+
+function checkEntries() {
+  const work = parseInt(workInput.value);
+  const rest = parseInt(breakInput.value);
+  const task = getSelectedTask();
+
+  if (isNaN(work) || work <= 0 || isNaN(rest) || rest <= 0 || !task) {
+    Swal.fire({
+      icon: "error",
+      title: "Datos inválidos",
+      text: "Completa todos los campos correctamente."
+    });
+    return false;
+  }
+  return true;
+}
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  if (!checkEntries()) return;
+
   workMinutes = parseInt(workInput.value);
   breakMinutes = parseInt(breakInput.value);
   isWorkTime = true;
@@ -41,8 +117,8 @@ resetButton.addEventListener("click", () => {
 function startTimer(duration) {
   clearInterval(intervalId);
   currentTime = duration;
-  updateDisplay(currentTime);
-  statusDisplay.textContent = isWorkTime ? "Estado: Enfocado 💼" : "Estado: Descanso ☕";
+  const task = getSelectedTask();
+  statusDisplay.textContent = isWorkTime ? `Estado: Enfocado en ${task}` : `Estado: Descanso ☕`;
 
   intervalId = setInterval(() => {
     currentTime--;
@@ -54,14 +130,7 @@ function startTimer(duration) {
 
     if (currentTime <= 0) {
       clearInterval(intervalId);
-
-      sessionHistory.push({
-        type: isWorkTime ? "work" : "break",
-        duration: isWorkTime ? workMinutes * 60 : breakMinutes * 60,
-        timestamp: new Date().toISOString()
-      });
-      saveSessionHistory();
-
+      saveSession(task, isWorkTime ? "work" : "break", total);
       isWorkTime = !isWorkTime;
       startTimer(isWorkTime ? workMinutes * 60 : breakMinutes * 60);
     }
@@ -74,28 +143,50 @@ function updateDisplay(seconds) {
   timerDisplay.textContent = `${min}:${sec}`;
 }
 
-function saveSessionHistory() {
-  localStorage.setItem("sessionHistory", JSON.stringify(sessionHistory));
+function saveSession(tarea, tipo, duracion) {
+  try {
+    const newSession = {
+      tarea: tarea,
+      type: tipo,
+      duration: duracion,
+      timestamp: new Date().toISOString()
+    };
+    sessionHistory.push(newSession);
+    localStorage.setItem("sessionHistory", JSON.stringify(sessionHistory));
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error al guardar",
+      text: "No se pudo guardar la sesión. Intenta nuevamente."
+    });
+  }
 }
 
-viewBtn.addEventListener("click", () => {
+viewButton.addEventListener("click", () => {
   historyList.innerHTML = "";
   if (sessionHistory.length === 0) {
     historyList.innerHTML = "<li>No hay sesiones registradas.</li>";
     return;
   }
-
   sessionHistory.forEach((session, i) => {
     const li = document.createElement("li");
-    li.textContent = `${i + 1}. ${session.type === "work" ? "Trabajo" : "Descanso"} - ${session.duration / 60} min - ${new Date(session.timestamp).toLocaleString()}`;
+    li.textContent = `${i + 1}. ${session.tarea || "Sin tarea"} - ${session.type === "work" ? "Trabajo" : "Descanso"} - ${session.duration / 60} min - ${new Date(session.timestamp).toLocaleString()}`;
     historyList.appendChild(li);
   });
 });
 
-clearBtn.addEventListener("click", () => {
+clearButton.addEventListener("click", () => {
   sessionHistory = [];
-  saveSessionHistory();
-  historyList.innerHTML = "<li>Historial borrado.</li>";
+  try {
+    localStorage.setItem("sessionHistory", JSON.stringify(sessionHistory));
+    historyList.innerHTML = "<li>Historial borrado.</li>";
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error al borrar",
+      text: "No se pudo borrar el historial."
+    });
+  }
 });
 
 const circle = document.querySelector(".progress-ring__circle");
@@ -109,3 +200,5 @@ function setProgress(percent) {
   const offset = circumference - (percent / 100) * circumference;
   circle.style.strokeDashoffset = offset;
 }
+
+fetchTasks();

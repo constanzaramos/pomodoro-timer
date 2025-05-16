@@ -1,4 +1,3 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -159,7 +158,7 @@ button:hover {
 
 .progress-ring__circle {
   fill: transparent;
-  stroke: #a771e7;
+  stroke: white;
   stroke-width: 10;
   stroke-linecap: round;
   stroke-dasharray: 439.82;
