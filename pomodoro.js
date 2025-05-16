@@ -53,6 +53,7 @@ function renderSelectorTask() {
 
   const select = document.createElement("select");
   select.id = "tarea-select";
+  select.classList.add("select-tarea");
   select.innerHTML = `<option value="">Selecciona una tarea</option>`;
   AvailableTasks.forEach(task => {
     const option = document.createElement("option");
@@ -67,6 +68,7 @@ function renderSelectorTask() {
   input.type = "text";
   input.placeholder = "Describe tu tarea...";
   input.style.display = "none";
+  input.classList.add("input-tarea");
   container.appendChild(input);
 
   select.addEventListener("change", () => {

@@ -1,3 +1,4 @@
+/* Reset y base */
 * {
   margin: 0;
   padding: 0;
@@ -22,7 +23,7 @@ body::before {
   z-index: -1;
 }
 
-/* Layout */
+/* Layout general */
 .app-layout {
   display: flex;
   flex-wrap: wrap;
@@ -60,7 +61,7 @@ body::before {
   color: #fefefe;
 }
 
-/* Typography */
+/* Tipografía */
 h1 {
   font-family: "Permanent Marker", cursive;
   font-size: 42px;
@@ -82,18 +83,36 @@ form label {
   color: #ffffff;
 }
 
-/* Form Elements */
-input {
-  width: 60px;
-  text-align: center;
-  background-color: #ffffff;
-  border-radius: 5px;
-  padding: 8px;
+/* Grupos de formulario */
+.form-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.form-group label {
+  color: white;
   font-size: 16px;
+  margin-right: 5px;
+}
+
+input[type="number"] {
+  padding: 10px;
+  border-radius: 10px;
   border: none;
+  text-align: center;
+  font-size: 16px;
+  width: 60px;
+}
+
+/* Input genérico */
+input {
   outline: none;
 }
 
+/* Botones */
 .button-group {
   display: flex;
   justify-content: center;
@@ -106,8 +125,9 @@ button {
   background-color: #a771e7;
   color: white;
   padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   font-weight: bold;
+  font-size: 16px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
@@ -135,7 +155,7 @@ button:hover {
   background-color: #5ea784;
 }
 
-/* Timer */
+/* Timer visual */
 .circle-container {
   position: relative;
   width: 160px;
@@ -184,7 +204,7 @@ button:hover {
   font-size: 1.1rem;
 }
 
-/* History */
+/* Historial */
 .session-history {
   margin-top: 40px;
   background-color: rgba(255,255,255,0.05);
@@ -210,6 +230,7 @@ button:hover {
   margin-bottom: 5px;
 }
 
+/* Botón de ayuda */
 #toggle-info {
   background: none;
   border: none;
@@ -223,5 +244,44 @@ button:hover {
   transform: scale(1.1);
 }
 
+/* Selector de tarea */
+.tarea-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
+#tarea-selector label {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 5px;
+}
 
+.select-tarea {
+  width: 80%;
+  max-width: 300px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #4b3b5a;
+  color: white;
+  appearance: none;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.input-tarea {
+  width: 80%;
+  max-width: 300px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #ffffff;
+  color: #333;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}

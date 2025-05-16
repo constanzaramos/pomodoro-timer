@@ -12,19 +12,17 @@
   <body>
     <div class="text">
       <h1>Pomodoro Timer</h1>
-      <p>
-        Este simulador permite realizar ciclos de concentración Pomodoro (25min
-        trabajo + 5min descanso). Diseñado para ayudarte a gestionar tu tiempo y
-        mejorar tu productividad.
-          <div class="info-section">
+      <p class="intro-text">
+        Este simulador permite realizar ciclos de concentración Pomodoro (25min trabajo + 5min descanso). Diseñado para ayudarte a gestionar tu tiempo y mejorar tu productividad.
         <button
           id="toggle-info"
           title="¿Cómo funciona?"
           aria-label="¿Cómo funciona?"
+          class="info-icon-button"
         >
           <svg
-            width="28"
-            height="28"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="#ffffff"
             xmlns="http://www.w3.org/2000/svg"
@@ -44,15 +42,20 @@
           </svg>
         </button>
       </p>
-      </div>
 
       <form id="form-pomodoro">
         <div class="tarea-selector" id="tarea-selector"></div>
-        <label for="work-time">Tiempo de trabajo (min):</label>
-        <input type="number" id="work-time" value="25" min="1" max="60" />
 
-        <label for="break-time">Tiempo de descanso (min):</label>
-        <input type="number" id="break-time" value="5" min="1" max="60" />
+        <div class="form-group">
+          <div>
+            <label for="work-time">Tiempo de trabajo (min):</label>
+            <input type="number" id="work-time" value="25" min="1" max="60" />
+          </div>
+          <div>
+            <label for="break-time">Tiempo de descanso (min):</label>
+            <input type="number" id="break-time" value="5" min="1" max="60" />
+          </div>
+        </div>
 
         <div class="button-group">
           <button type="submit">Iniciar</button>
