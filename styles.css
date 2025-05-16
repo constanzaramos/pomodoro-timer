@@ -310,3 +310,9 @@ button:hover {
   border: none;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
+
+.input-work {
+  background-color: #4b3b5a;
+  color: white;
+
+}
