@@ -127,6 +127,14 @@ function startTimer(duration) {
   const task = getSelectedTask();
   statusDisplay.textContent = isWorkTime ? `Estado: Enfocado en ${task}` : `Estado: Descanso ☕`;
 
+    if (isWorkTime) {
+    document.getElementById("sound-work-start").play();
+    statusDisplay.textContent = `Estado: Enfocado en ${task}`;
+  } else {
+    document.getElementById("sound-break-start").play();
+    statusDisplay.textContent = `Estado: Descanso ☕`;
+  }
+
   intervalId = setInterval(() => {
     currentTime--;
     updateDisplay(currentTime);
@@ -137,6 +145,8 @@ function startTimer(duration) {
 
     if (currentTime <= 0) {
       clearInterval(intervalId);
+            document.getElementById("sound-end").play();
+
       saveSession(task, isWorkTime ? "work" : "break", total);
       isWorkTime = !isWorkTime;
       startTimer(isWorkTime ? workMinutes * 60 : breakMinutes * 60);
