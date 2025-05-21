@@ -44,6 +44,9 @@ Este proyecto es un **temporizador Pomodoro**. Está diseñado para ayudarte a *
   - Spotify Embed para música de foco 🎧
 
 ---
+## 📸 Capturas
+![Vista principal del temporizador](./assets/Pomodoro-Timer.png) 
+ ![Modo responsive en móvil](./assets/mobile.png)
 
 ## 🚀 Cómo usar
 
